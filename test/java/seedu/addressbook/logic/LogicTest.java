@@ -75,7 +75,7 @@ public class LogicTest {
                                       String expectedMessage,
                                       AddressBook expectedAddressBook,
                                       boolean isRelevantPersonsExpected,
-                                      List<? extends ReadOnlyPerson> lastShownList) throws Exception {
+                                      List<? extends ReadAndWritePerson> lastShownList) throws Exception {
 
         //Execute the command
         CommandResult r = logic.execute(inputCommand);
@@ -189,7 +189,7 @@ public class LogicTest {
         // prepare expectations
         TestDataHelper helper = new TestDataHelper();
         AddressBook expectedAB = helper.generateAddressBook(false, true);
-        List<? extends ReadOnlyPerson> expectedList = expectedAB.getAllPersons().immutableListView();
+        List<? extends ReadAndWritePerson> expectedList = expectedAB.getAllPersons().immutableListView();
 
         // prepare address book state
         helper.addToAddressBook(addressBook, false, true);

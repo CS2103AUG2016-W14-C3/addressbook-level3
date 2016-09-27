@@ -3,7 +3,7 @@ package seedu.addressbook.storage.jaxb;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Person;
-import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.ReadAndWritePerson;
 import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
@@ -37,7 +37,7 @@ public class AdaptedAddressBook {
     public AdaptedAddressBook(AddressBook source) {
         persons = new ArrayList<>();
         tags = new ArrayList<>();
-        for (ReadOnlyPerson person : source.getAllPersons()) {
+        for (ReadAndWritePerson person : source.getAllPersons()) {
             persons.add(new AdaptedPerson(person));
         }
         for (Tag tag : source.getAllTags()) {

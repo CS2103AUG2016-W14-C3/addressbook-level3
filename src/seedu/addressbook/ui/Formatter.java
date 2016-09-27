@@ -1,6 +1,6 @@
 package seedu.addressbook.ui;
 
-import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.ReadAndWritePerson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +35,9 @@ public class Formatter {
     }
 
     /** Formats the given list of persons for displaying to the user. */
-    public String format(List<? extends ReadOnlyPerson> persons) {
+    public String format(List<? extends ReadAndWritePerson> persons) {
         final List<String> formattedPersons = new ArrayList<>();
-        for (ReadOnlyPerson person : persons) {
+        for (ReadAndWritePerson person : persons) {
             formattedPersons.add(person.getAsTextHidePrivate());
         }
         return format(asIndexedList(formattedPersons));

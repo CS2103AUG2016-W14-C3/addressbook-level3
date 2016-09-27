@@ -53,7 +53,7 @@ public class AddCommand extends Command {
         this.toAdd = toAdd;
     }
 
-    public ReadOnlyPerson getPerson() {
+    public ReadAndWritePerson getPerson() {
         return toAdd;
     }
 

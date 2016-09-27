@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 import seedu.addressbook.commands.ExitCommand;
 import seedu.addressbook.logic.Logic;
 import seedu.addressbook.commands.CommandResult;
-import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.ReadAndWritePerson;
 
 import java.util.List;
 import java.util.Optional;
@@ -80,7 +80,7 @@ public class MainWindow {
     /** Displays the result of a command execution to the user. */
     public void displayResult(CommandResult result) {
         clearOutputConsole();
-        final Optional<List<? extends ReadOnlyPerson>> resultPersons = result.getRelevantPersons();
+        final Optional<List<? extends ReadAndWritePerson>> resultPersons = result.getRelevantPersons();
         if(resultPersons.isPresent()) {
             display(resultPersons.get());
         }
@@ -96,7 +96,7 @@ public class MainWindow {
      * Displays the list of persons in the output display area, formatted as an indexed list.
      * Private contact details are hidden.
      */
-    private void display(List<? extends ReadOnlyPerson> persons) {
+    private void display(List<? extends ReadAndWritePerson> persons) {
         display(new Formatter().format(persons));
     }
 

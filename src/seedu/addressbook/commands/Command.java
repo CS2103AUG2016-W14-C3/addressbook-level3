@@ -2,7 +2,8 @@ package seedu.addressbook.commands;
 
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
-import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.exception.IllegalValueException;
+import seedu.addressbook.data.person.ReadAndWritePerson;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import static seedu.addressbook.ui.Gui.DISPLAYED_INDEX_OFFSET;
  */
 public abstract class Command {
     protected AddressBook addressBook;
-    protected List<? extends ReadOnlyPerson> relevantPersons;
+    protected List<? extends ReadAndWritePerson> relevantPersons;
     private int targetIndex = -1;
 
     /**
@@ -32,19 +33,20 @@ public abstract class Command {
      * @param personsDisplayed used to generate summary
      * @return summary message for persons displayed
      */
-    public static String getMessageForPersonListShownSummary(List<? extends ReadOnlyPerson> personsDisplayed) {
+    public static String getMessageForPersonListShownSummary(List<? extends ReadAndWritePerson> personsDisplayed) {
         return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, personsDisplayed.size());
     }
 
     /**
      * Executes the command and returns the result.
+     * @throws IllegalValueException 
      */
-    public abstract CommandResult execute();
+    public abstract CommandResult execute() throws IllegalValueException;
 
     /**
      * Supplies the data the command will operate on.
      */
-    public void setData(AddressBook addressBook, List<? extends ReadOnlyPerson> relevantPersons) {
+    public void setData(AddressBook addressBook, List<? extends ReadAndWritePerson> relevantPersons) {
         this.addressBook = addressBook;
         this.relevantPersons = relevantPersons;
     }
@@ -54,7 +56,7 @@ public abstract class Command {
      *
      * @throws IndexOutOfBoundsException if the target index is out of bounds of the last viewed listing
      */
-    protected ReadOnlyPerson getTargetPerson() throws IndexOutOfBoundsException {
+    protected ReadAndWritePerson getTargetPerson() throws IndexOutOfBoundsException {
         return relevantPersons.get(getTargetIndex() - DISPLAYED_INDEX_OFFSET);
     }
 
