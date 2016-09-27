@@ -25,7 +25,7 @@ public class ClearCommand extends Command {
         for (Person person : addressBook.getAllPersons()){
             personsAffected.add(person);
         }
-        history.insert(new RecentCommand("clear", new ArrayList<Person>()));
+        history.insert(new RecentCommand("clear", personsAffected));
         addressBook.clear();
         return new CommandResult(MESSAGE_SUCCESS);
     }

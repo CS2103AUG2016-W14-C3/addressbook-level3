@@ -66,7 +66,7 @@ public class AddCommand extends Command {
             addressBook.addPerson(toAdd);
             ArrayList<Person> personsAffected = new ArrayList<Person>();
             personsAffected.add(toAdd);
-            history.insert(new RecentCommand("add", new ArrayList<Person>()));
+            history.insert(new RecentCommand("add", personsAffected));
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniquePersonList.DuplicatePersonException dpe) {
             return new CommandResult(MESSAGE_DUPLICATE_PERSON);

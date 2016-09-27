@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
             addressBook.removePerson(target);
             ArrayList<Person> personsAffected = new ArrayList<Person>();
             personsAffected.add((Person)target);
-            history.insert(new RecentCommand("delete", new ArrayList<Person>()));
+            history.insert(new RecentCommand("delete", personsAffected));
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, target));
 
         } catch (IndexOutOfBoundsException ie) {
