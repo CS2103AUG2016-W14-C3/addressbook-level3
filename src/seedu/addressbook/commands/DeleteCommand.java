@@ -1,6 +1,7 @@
 package seedu.addressbook.commands;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.person.Person;
@@ -34,9 +35,9 @@ public class DeleteCommand extends Command {
         try {
             final ReadOnlyPerson target = getTargetPerson();
             addressBook.removePerson(target);
-            ArrayList<Person> personsAffected = new ArrayList<Person>();
+            List<Person> personsAffected = new ArrayList<Person>();
             personsAffected.add((Person)target);
-            history.insert(new RecentCommand("delete", personsAffected));
+            history.insert(new RecentCommand(COMMAND_WORD, personsAffected));
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, target));
 
         } catch (IndexOutOfBoundsException ie) {

@@ -8,6 +8,7 @@ import seedu.addressbook.history.History;
 import seedu.addressbook.history.RecentCommand;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -64,9 +65,9 @@ public class AddCommand extends Command {
     public CommandResult execute() {
         try {
             addressBook.addPerson(toAdd);
-            ArrayList<Person> personsAffected = new ArrayList<Person>();
+            List<Person> personsAffected = new ArrayList<Person>();
             personsAffected.add(toAdd);
-            history.insert(new RecentCommand("add", personsAffected));
+            history.insert(new RecentCommand(COMMAND_WORD, personsAffected));
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniquePersonList.DuplicatePersonException dpe) {
             return new CommandResult(MESSAGE_DUPLICATE_PERSON);

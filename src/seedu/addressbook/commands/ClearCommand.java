@@ -1,6 +1,7 @@
 package seedu.addressbook.commands;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import seedu.addressbook.data.person.Person;
 import seedu.addressbook.history.RecentCommand;
@@ -21,11 +22,11 @@ public class ClearCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        ArrayList<Person> personsAffected = new ArrayList<Person>();
+        List<Person> personsAffected = new ArrayList<Person>();
         for (Person person : addressBook.getAllPersons()){
             personsAffected.add(person);
         }
-        history.insert(new RecentCommand("clear", personsAffected));
+        history.insert(new RecentCommand(COMMAND_WORD, personsAffected));
         addressBook.clear();
         return new CommandResult(MESSAGE_SUCCESS);
     }

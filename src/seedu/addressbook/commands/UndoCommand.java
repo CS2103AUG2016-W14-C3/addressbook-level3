@@ -11,12 +11,13 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n" + "Undo previous command.\n\t"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "Previous command restored.";
+    public static final String MESSAGE_SUCCESS = "Undo: %1$s %2$s";
+    public static final String MESSAGE_EMPTY_HISTORY = "Empty History. Nothing to Undo.";
     
     @Override
     public CommandResult execute() {
         if (history.isEmpty()) {
-            return new CommandResult("Empty History. Nothing to Undo.");
+            return new CommandResult(MESSAGE_EMPTY_HISTORY);
         } else {
             RecentCommand command = history.remove();
             
@@ -29,7 +30,7 @@ public class UndoCommand extends Command {
                             e.printStackTrace();
                         }
                     }
-                    return new CommandResult("Undo:\tadd " + command.getListOfPersons().get(0).toString());
+                    return new CommandResult(String.format(MESSAGE_SUCCESS, command.getCommandName(), command.getListOfPersons().get(0).toString()));
                     
                 case "delete":
                     for (Person person : command.getListOfPersons()) {
@@ -39,7 +40,7 @@ public class UndoCommand extends Command {
                             e.printStackTrace();
                         }
                     }
-                    return new CommandResult("Undo:\tdelete " + command.getListOfPersons().get(0).toString());
+                    return new CommandResult(String.format(MESSAGE_SUCCESS, command.getCommandName(), command.getListOfPersons().get(0).toString()));
                     
                 case "clear":
                     for (Person person : command.getListOfPersons()) {
@@ -49,10 +50,10 @@ public class UndoCommand extends Command {
                             e.printStackTrace();
                         }
                     }
-                    return new CommandResult("Undo:\tclear");
+                    return new CommandResult(String.format(MESSAGE_SUCCESS, command.getCommandName(), ""));
                 
                 default:
-                    return new CommandResult("Nothing to Undo.");
+                    return new CommandResult(MESSAGE_EMPTY_HISTORY);
             }
         }
     }

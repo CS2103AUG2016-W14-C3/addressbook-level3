@@ -1,14 +1,15 @@
 package seedu.addressbook.history;
 
-import java.util.ArrayList;
+import java.util.List;
+
 import seedu.addressbook.data.person.Person;
 
 public class RecentCommand {
 
     private String commandName;
-    private ArrayList<Person> listOfPersons;
+    private List<Person> listOfPersons;
     
-    public RecentCommand(String commandName, ArrayList<Person> listOfPersons) {
+    public RecentCommand(String commandName, List<Person> listOfPersons) {
         this.commandName = commandName;
         this.listOfPersons = listOfPersons;
     }
@@ -17,7 +18,7 @@ public class RecentCommand {
         return commandName;
     }
     
-    public ArrayList<Person> getListOfPersons() {
+    public List<Person> getListOfPersons() {
         return listOfPersons;
     }
 }
