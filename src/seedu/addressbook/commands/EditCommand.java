@@ -74,4 +74,9 @@ public class EditCommand extends Command {
         }
 	}
 
+    @Override
+    public boolean isMutating() {
+        return true;
+    }
+
 }

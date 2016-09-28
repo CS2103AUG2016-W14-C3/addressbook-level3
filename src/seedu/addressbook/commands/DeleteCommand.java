@@ -1,8 +1,13 @@
 package seedu.addressbook.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import seedu.addressbook.common.Messages;
+import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.ReadAndWritePerson;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
+import seedu.addressbook.history.RecentCommand;
 
 
 /**
@@ -30,6 +35,9 @@ public class DeleteCommand extends Command {
         try {
             final ReadAndWritePerson target = getTargetPerson();
             addressBook.removePerson(target);
+            List<Person> personsAffected = new ArrayList<>();
+            personsAffected.add((Person)target);
+            history.insert(new RecentCommand(COMMAND_WORD, personsAffected));
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, target));
 
         } catch (IndexOutOfBoundsException ie) {
@@ -37,6 +45,12 @@ public class DeleteCommand extends Command {
         } catch (PersonNotFoundException pnfe) {
             return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
         }
+    }
+
+
+    @Override
+    public boolean isMutating() {
+        return true;
     }
 
 }

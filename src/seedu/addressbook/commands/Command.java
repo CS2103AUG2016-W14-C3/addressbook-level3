@@ -4,6 +4,7 @@ import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.ReadAndWritePerson;
+import seedu.addressbook.history.History;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import static seedu.addressbook.ui.Gui.DISPLAYED_INDEX_OFFSET;
 public abstract class Command {
     protected AddressBook addressBook;
     protected List<? extends ReadAndWritePerson> relevantPersons;
+    protected History history;
     private int targetIndex = -1;
 
     /**
@@ -46,9 +48,10 @@ public abstract class Command {
     /**
      * Supplies the data the command will operate on.
      */
-    public void setData(AddressBook addressBook, List<? extends ReadAndWritePerson> relevantPersons) {
+    public void setData(AddressBook addressBook, List<? extends ReadAndWritePerson> relevantPersons, History history) {
         this.addressBook = addressBook;
         this.relevantPersons = relevantPersons;
+        this.history = history;
     }
 
     /**
@@ -67,4 +70,6 @@ public abstract class Command {
     public void setTargetIndex(int targetIndex) {
         this.targetIndex = targetIndex;
     }
+    
+    public abstract boolean isMutating();
 }

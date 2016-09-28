@@ -4,7 +4,11 @@ import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.*;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
+import seedu.addressbook.history.History;
+import seedu.addressbook.history.RecentCommand;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -61,10 +65,18 @@ public class AddCommand extends Command {
     public CommandResult execute() {
         try {
             addressBook.addPerson(toAdd);
+            List<Person> personsAffected = new ArrayList<Person>();
+            personsAffected.add(toAdd);
+            history.insert(new RecentCommand(COMMAND_WORD, personsAffected));
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniquePersonList.DuplicatePersonException dpe) {
             return new CommandResult(MESSAGE_DUPLICATE_PERSON);
         }
+    }
+
+    @Override
+    public boolean isMutating() {
+        return true;
     }
 
 }

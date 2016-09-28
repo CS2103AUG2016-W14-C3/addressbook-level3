@@ -15,7 +15,9 @@ public class HelpCommand extends Command {
             + "\n" + DeleteCommand.MESSAGE_USAGE
             + "\n" + EditCommand.MESSAGE_USAGE
             + "\n" + ClearCommand.MESSAGE_USAGE
+            + "\n" + UndoCommand.MESSAGE_USAGE
             + "\n" + FindCommand.MESSAGE_USAGE
+            + "\n" + FindTagCommand.MESSAGE_USAGE
             + "\n" + ListCommand.MESSAGE_USAGE
             + "\n" + ViewCommand.MESSAGE_USAGE
             + "\n" + ViewAllCommand.MESSAGE_USAGE
@@ -27,5 +29,10 @@ public class HelpCommand extends Command {
     @Override
     public CommandResult execute() {
         return new CommandResult(MESSAGE_ALL_USAGES);
+    }
+    
+    @Override
+    public boolean isMutating() {
+        return false;
     }
 }
