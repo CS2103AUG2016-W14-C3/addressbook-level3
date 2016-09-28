@@ -5,7 +5,7 @@ import java.util.List;
 
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.person.Person;
-import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.ReadAndWritePerson;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.history.RecentCommand;
 
@@ -33,9 +33,9 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
-            final ReadOnlyPerson target = getTargetPerson();
+            final ReadAndWritePerson target = getTargetPerson();
             addressBook.removePerson(target);
-            List<Person> personsAffected = new ArrayList<Person>();
+            List<Person> personsAffected = new ArrayList<>();
             personsAffected.add((Person)target);
             history.insert(new RecentCommand(COMMAND_WORD, personsAffected));
             return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, target));

@@ -1,6 +1,6 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.ReadAndWritePerson;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,14 +14,14 @@ public class CommandResult {
     public final String feedbackToUser;
 
     /** The list of persons that was produced by the command */
-    private final List<? extends ReadOnlyPerson> relevantPersons;
+    private final List<? extends ReadAndWritePerson> relevantPersons;
 
     public CommandResult(String feedbackToUser) {
         this.feedbackToUser = feedbackToUser;
         relevantPersons = null;
     }
 
-    public CommandResult(String feedbackToUser, List<? extends ReadOnlyPerson> relevantPersons) {
+    public CommandResult(String feedbackToUser, List<? extends ReadAndWritePerson> relevantPersons) {
         this.feedbackToUser = feedbackToUser;
         this.relevantPersons = relevantPersons;
     }
@@ -29,7 +29,7 @@ public class CommandResult {
     /**
      * Returns list of persons relevant to the command command result, if any.
      */
-    public Optional<List<? extends ReadOnlyPerson>> getRelevantPersons() {
+    public Optional<List<? extends ReadAndWritePerson>> getRelevantPersons() {
         return Optional.ofNullable(relevantPersons);
     }
 

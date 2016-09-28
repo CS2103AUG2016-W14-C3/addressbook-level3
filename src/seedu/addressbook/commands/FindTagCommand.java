@@ -1,6 +1,6 @@
 package seedu.addressbook.commands;
 
-import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.ReadAndWritePerson;
 import seedu.addressbook.data.tag.Tag;
 
 import java.util.*;
@@ -32,7 +32,7 @@ public class FindTagCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        final List<ReadOnlyPerson> personsFound = getPersonsWithNameContainingAnyKeyword(keyword);
+        final List<ReadAndWritePerson> personsFound = getPersonsWithNameContainingAnyKeyword(keyword);
         return new CommandResult(getMessageForPersonListShownSummary(personsFound), personsFound);
     }
 
@@ -42,10 +42,10 @@ public class FindTagCommand extends Command {
      * @param keywords for searching
      * @return list of persons found
      */
-    private List<ReadOnlyPerson> getPersonsWithNameContainingAnyKeyword(String keyword) {
-        final List<ReadOnlyPerson> matchedPersons = new ArrayList<>();
+    private List<ReadAndWritePerson> getPersonsWithNameContainingAnyKeyword(String keyword) {
+        final List<ReadAndWritePerson> matchedPersons = new ArrayList<>();
 
-        for (ReadOnlyPerson person : addressBook.getAllPersons()) {
+        for (ReadAndWritePerson person : addressBook.getAllPersons()) {
         	for (Tag tag : person.getTags()) {
         		String tagInString = tag.toString();
         		if(tagInString.equals(keyword))
@@ -56,6 +56,11 @@ public class FindTagCommand extends Command {
             }
         }
         return matchedPersons;
+    }
+
+    @Override
+    public boolean isMutating() {
+        return false;
     }
 
 }

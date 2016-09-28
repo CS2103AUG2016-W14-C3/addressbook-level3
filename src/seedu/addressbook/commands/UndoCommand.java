@@ -1,6 +1,7 @@
 package seedu.addressbook.commands;
 
 import seedu.addressbook.data.person.Person;
+import seedu.addressbook.data.person.ReadAndWritePerson;
 import seedu.addressbook.data.person.UniquePersonList.DuplicatePersonException;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.history.RecentCommand;
@@ -56,6 +57,11 @@ public class UndoCommand extends Command {
                     return new CommandResult(MESSAGE_EMPTY_HISTORY);
             }
         }
+    }
+
+    @Override
+    public boolean isMutating() {
+        return true;
     }
 
 }

@@ -94,7 +94,7 @@ public class AddressBook {
     /**
      * Checks if an equivalent person exists in the address book.
      */
-    public boolean containsPerson(ReadOnlyPerson key) {
+    public boolean containsPerson(ReadAndWritePerson key) {
         return allPersons.contains(key);
     }
 
@@ -110,7 +110,7 @@ public class AddressBook {
      *
      * @throws PersonNotFoundException if no such Person could be found.
      */
-    public void removePerson(ReadOnlyPerson toRemove) throws PersonNotFoundException {
+    public void removePerson(ReadAndWritePerson toRemove) throws PersonNotFoundException {
         allPersons.remove(toRemove);
     }
 
